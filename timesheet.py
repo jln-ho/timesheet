@@ -111,7 +111,7 @@ class Timesheet:
         self._set_column(self._col_break_end, row_index, break_end)
 
     def _get_column(self, column: str, row_index: int):
-        return self._sheet[column + str(row_index)]
+        return self._sheet[column + str(row_index + 1)]
 
     def _set_column(self, column: str, row_index: int, value):
         self._get_column(column, row_index).value = value
@@ -155,6 +155,8 @@ if __name__ == "__main__":
                         help="The start time of the break (hh:mm)")
     parser.add_argument("-be", "--break-end", required=False, nargs="?", const=now,
                         help="The end time of the break (hh:mm)")
+    parser.add_argument("-t", "--type", required=False, choices=["foo", "bar"],
+                        help="The type of the entry")
     parser.add_argument("-p", "--pretty", required=False, action="store_true", default=False,
                         help="Pretty-print the updated row")
     args = parser.parse_args()
